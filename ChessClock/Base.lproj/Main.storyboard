@@ -16,23 +16,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="av2-Pi-7kz">
-                                <rect key="frame" x="0.0" y="461" width="401" height="308"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="av2-Pi-7kz">
+                                <rect key="frame" x="0.0" y="461" width="393" height="308"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEg-a7-1P5">
+                                        <rect key="frame" x="175.66666666666666" y="143.66666666666663" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="pEg-a7-1P5" firstAttribute="centerX" secondItem="av2-Pi-7kz" secondAttribute="centerX" id="8Gv-Rz-jkE"/>
+                                    <constraint firstItem="pEg-a7-1P5" firstAttribute="centerY" secondItem="av2-Pi-7kz" secondAttribute="centerY" id="Iez-Rq-snw"/>
+                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hlL-zY-jlZ">
-                                <rect key="frame" x="0.0" y="59" width="401" height="308"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlL-zY-jlZ">
+                                <rect key="frame" x="0.0" y="59" width="393" height="308"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzs-6o-2tA">
+                                        <rect key="frame" x="175.66666666666666" y="143.66666666666666" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Dzs-6o-2tA" firstAttribute="centerY" secondItem="hlL-zY-jlZ" secondAttribute="centerY" id="2eY-eM-Ntw"/>
+                                    <constraint firstItem="Dzs-6o-2tA" firstAttribute="centerX" secondItem="hlL-zY-jlZ" secondAttribute="centerX" id="cEE-jJ-Z94"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="av2-Pi-7kz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="3gd-LP-q2e"/>
+                            <constraint firstItem="av2-Pi-7kz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8RT-XS-ynh"/>
+                            <constraint firstItem="av2-Pi-7kz" firstAttribute="top" secondItem="hlL-zY-jlZ" secondAttribute="bottom" constant="94" id="A7v-j9-oXB"/>
+                            <constraint firstItem="hlL-zY-jlZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DgE-g5-5tV"/>
+                            <constraint firstItem="hlL-zY-jlZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Mil-sA-hLZ"/>
+                            <constraint firstItem="av2-Pi-7kz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NBk-7i-7PP"/>
+                            <constraint firstItem="av2-Pi-7kz" firstAttribute="top" secondItem="hlL-zY-jlZ" secondAttribute="bottom" constant="94" id="Sf5-Fr-KT5"/>
+                            <constraint firstItem="hlL-zY-jlZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VBm-ar-2Tx"/>
+                            <constraint firstItem="av2-Pi-7kz" firstAttribute="height" secondItem="hlL-zY-jlZ" secondAttribute="height" id="xq6-im-wpM"/>
+                        </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="p1TimeLabel" destination="pEg-a7-1P5" id="HLA-mj-Ha3"/>
                         <outlet property="p1Timer" destination="av2-Pi-7kz" id="XWf-Ji-XS4"/>
+                        <outlet property="p2TimeLabel" destination="Dzs-6o-2tA" id="x5L-KS-sCS"/>
                         <outlet property="p2Timer" destination="hlL-zY-jlZ" id="773-Ic-kCI"/>
                     </connections>
                 </viewController>
