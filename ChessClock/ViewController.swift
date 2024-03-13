@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     var p2Moves = 0
     var gameStarted = false
     var winner: String?
+    var currentPlayer: Int?
     
     
     override func viewDidLoad() {
@@ -56,6 +57,32 @@ class ViewController: UIViewController {
             let scaledImage = symbolImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30, weight: .thin))
             anotherGameButton.setImage(scaledImage, for: .normal)
         }
+    }
+    
+    @IBAction func playButtonAction(_ sender: UIButton) {
+        if currentPlayer == 1{
+            startP1Timer()
+        } else if currentPlayer == 2 {
+            startP2Timer()
+        } else {return}
+        
+    }
+    
+    @IBAction func pauseButtonAction(_ sender: UIButton) {
+        if gameStarted {
+                   if let timer = p1Timer, timer.isValid {
+                       pause(timer)
+                       currentPlayer = 1
+                   }
+                   if let timer = p2Timer, timer.isValid {
+                       pause(timer)
+                       currentPlayer = 2
+                   }
+               }
+    }
+    
+    @IBAction func newGameButtonAction(_ sender: UIButton) {
+        resetGame()
     }
     
     func setupTapRecognizers(){
@@ -150,6 +177,10 @@ class ViewController: UIViewController {
         timer?.invalidate()
     }
     
+    func start(_ timer: Timer?){
+        
+    }
+    
     func gameEndCheck(by currentTime: Int, for player: Int){
         if currentTime == 0 {
             pause(p2Timer)
@@ -161,12 +192,18 @@ class ViewController: UIViewController {
             }
             if player == 2 {
                 p2TimerArea.backgroundColor = UIColor(red: 199/255, green: 69/255, blue: 71/255, alpha: 1.0)
-                winner = "Player 2 is the winner :)"
+                winner = "Player 1 is the winner :)"
             }
             
             performSegue(withIdentifier: gameOverSegue, sender: self)
         }
        
+    }
+    
+    func resetGame(){
+        if let navigationController = self.navigationController {
+                navigationController.popToRootViewController(animated: true)
+            }
     }
     
     func updateLabel(p player: Int) {

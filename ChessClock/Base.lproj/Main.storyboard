@@ -83,6 +83,9 @@
                                         <buttonConfiguration key="configuration" style="plain" image="play" catalog="system">
                                             <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="playButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PEJ-JU-300"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6P-Se-tdk">
                                         <rect key="frame" x="63.999999999999986" y="0.0" width="64" height="64"/>
@@ -94,6 +97,9 @@
                                         <buttonConfiguration key="configuration" style="plain" image="pause" catalog="system">
                                             <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="pauseButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tbw-nQ-fs3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mj2-Zo-BC2">
                                         <rect key="frame" x="128" y="0.0" width="64" height="64"/>
@@ -105,6 +111,9 @@
                                         <buttonConfiguration key="configuration" style="plain" image="repeat" catalog="system">
                                             <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="newGameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U6S-FT-3mG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -147,7 +156,7 @@
         <!--Game Over View Controller-->
         <scene sceneID="bTr-9d-POw">
             <objects>
-                <viewController id="k8E-Uz-Fc2" customClass="GameOverViewController" customModule="ChessClock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameOverViewController" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="k8E-Uz-Fc2" customClass="GameOverViewController" customModule="ChessClock" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cv1-eV-eiI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
