@@ -60,12 +60,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func playButtonAction(_ sender: UIButton) {
-        if currentPlayer == 1{
-            startP1Timer()
-        } else if currentPlayer == 2 {
-            startP2Timer()
-        } else {return}
-        
+        continueGame()
     }
     
     @IBAction func pauseButtonAction(_ sender: UIButton) {
@@ -82,7 +77,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func newGameButtonAction(_ sender: UIButton) {
-        resetGame()
+        resetGameState()
     }
     
     func setupTapRecognizers(){
@@ -177,8 +172,12 @@ class ViewController: UIViewController {
         timer?.invalidate()
     }
     
-    func start(_ timer: Timer?){
-        
+    func continueGame(){
+        if currentPlayer == 1{
+            startP1Timer()
+        } else if currentPlayer == 2 {
+            startP2Timer()
+        } else {return}
     }
     
     func gameEndCheck(by currentTime: Int, for player: Int){
@@ -197,13 +196,29 @@ class ViewController: UIViewController {
             
             performSegue(withIdentifier: gameOverSegue, sender: self)
         }
-       
     }
     
-    func resetGame(){
-        if let navigationController = self.navigationController {
-                navigationController.popToRootViewController(animated: true)
-            }
+    func resetGameState(){
+            p1Timer?.invalidate()
+            p2Timer?.invalidate()
+            p1Timer = nil
+            p2Timer = nil
+        
+            p1CurrentTime = 10
+            p2CurrentTime = 10
+            p1Moves = 0
+            p2Moves = 0
+            gameStarted = false
+            winner = nil
+            currentPlayer = nil
+
+            p1TimeLabel.text = "10:00"
+            p2TimeLabel.text = "10:00"
+            p1MoveLabel.text = "M O V E S : 0"
+            p2MoveLabel.text = "M O V E S : 0"
+            p1TimerArea.backgroundColor = .systemGray4
+            p2TimerArea.backgroundColor = .systemGray4
+        
     }
     
     func updateLabel(p player: Int) {
