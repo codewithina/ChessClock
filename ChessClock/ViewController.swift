@@ -15,10 +15,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var p1TimeLabel: UILabel!
     @IBOutlet weak var p2TimeLabel: UILabel!
     
+    @IBOutlet weak var p1MoveLabel: UILabel!
+    @IBOutlet weak var p2MoveLabel: UILabel!
+    
     var p1Timer: Timer?
     var p2Timer: Timer?
     var p1CurrentTime = 600
     var p2CurrentTime = 600
+    var p1Moves = 0
+    var p2Moves = 0
     var gameStarted = false
     
     
@@ -29,40 +34,72 @@ class ViewController: UIViewController {
     }
     
     func setupTapRecognizers(){
-            let p1TapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-            p1TimerArea.addGestureRecognizer(p1TapGesture)
-            let p2TapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-            p2TimerArea.addGestureRecognizer(p2TapGesture)
-        }
+        let p1TapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        p1TimerArea.addGestureRecognizer(p1TapGesture)
+        let p2TapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        p2TimerArea.addGestureRecognizer(p2TapGesture)
+    }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-           if !gameStarted {
-               gameStarted = true
-               startP1Timer()
-           } else {
-               if sender.view == p1TimerArea {
-                       if p1Timer != nil && p1Timer!.isValid {
-                           p1Timer?.invalidate() // Stoppa p1Timer om den är aktiv
-                           startP2Timer() // Starta p2Timer
-                       }
-                   } else if sender.view == p2TimerArea {
-                       if p2Timer != nil && p2Timer!.isValid {
-                           p2Timer?.invalidate() // Stoppa p2Timer om den är aktiv
-                           startP1Timer() // Starta p1Timer
-                       }
-                   }
-           }
-       }
+        guard let tappedView = sender.view else {return}
+        if !gameStarted {
+            gameStarted = true
+            addGreenBg(on: tappedView)
+            if tappedView == p1TimerArea {
+                startP1Timer()
+            } else if tappedView == p2TimerArea {
+                startP2Timer()
+            }
+        } else {
+            if sender.view == p1TimerArea {
+                if p1Timer != nil && p1Timer!.isValid {
+                    p1Timer?.invalidate()
+                    startP2Timer()
+                    addGreenBg(on: p2TimerArea)
+                    p1Moves += 1
+                    let p1NewText = "M O V E S :  \(p1Moves)"
+                    p1MoveLabel.text = p1NewText
+                }
+            } else if sender.view == p2TimerArea {
+                if p2Timer != nil && p2Timer!.isValid {
+                    p2Timer?.invalidate()
+                    startP1Timer()
+                    addGreenBg(on: p1TimerArea)
+                    p2Moves += 1
+                    let p2NewText = "M O V E S : \(p2Moves)"
+                    p2MoveLabel.text = p2NewText
+                }
+            }
+        }
+    }
     
     
     func setUpInitTimerArea(){
-        p1TimerArea.layer.cornerRadius = 20
-        p1TimeLabel.text = "10:00"
-        p1TimeLabel.font = UIFont(name: "Arial", size: 60)
-        p2TimerArea.layer.cornerRadius = 20
-        p2TimeLabel.text = "10:00"
-        p2TimeLabel.font = UIFont(name: "Arial", size: 60)
-        p2TimeLabel.transform = CGAffineTransform(rotationAngle: .pi)
+        let playerArea: [UIView] = [p1TimerArea, p2TimerArea]
+        let playerTimerLabels: [UILabel] = [p1TimeLabel, p2TimeLabel]
+        
+        applyTextAndFont(to: playerTimerLabels)
+        applyRoundedCornerAndShadow(to: playerArea)
+        self.p2TimerArea.transform = CGAffineTransform(rotationAngle: .pi)
+    }
+    
+    func applyTextAndFont(to timerLabels: [UILabel]) {
+        for label in timerLabels {
+            label.text = "10:00"
+            label.font = UIFont(name: "Arial", size: 60)
+        }
+    }
+    
+    func applyRoundedCornerAndShadow(to views: [UIView]) {
+        for view in views {
+            view.layer.cornerRadius = 20
+            view.clipsToBounds = true
+            view.layer.shadowColor = UIColor.black.cgColor
+            view.layer.shadowOpacity = 0.2
+            view.layer.shadowOffset = CGSize(width: 0, height: 2)
+            view.layer.shadowRadius = 4
+            view.layer.masksToBounds = false
+        }
     }
     
     func startP1Timer() {
@@ -101,15 +138,14 @@ class ViewController: UIViewController {
         }
     }
     
-    func onGoingTimerBg(timerArea: UIView) {
-        timerArea.backgroundColor = UIColor.green
+    func addGreenBg(on timerArea: UIView) {
+        timerArea.backgroundColor = UIColor(red: 0.0, green: 0.7, blue: 0.0, alpha: 0.6)
+        
+        if timerArea == p1TimerArea {
+            p2TimerArea.backgroundColor = UIColor.systemGray4
+        } else if timerArea == p2TimerArea {
+            p1TimerArea.backgroundColor = UIColor.systemGray4
+        }
     }
-    
 }
 
-//Hantera Touch Events med UITapGestureRecognizer: Du behöver lägga till en UITapGestureRecognizer till varje UIView. När en spelare trycker på sin klocka, ska du stoppa deras timer och starta motståndarens timer.
-//
-//Uppdatera UILabels med aktuell tid: När en timer tickar, uppdatera motsvarande UILabel med aktuell tid.
-//
-//Hantera spelets slut: När en spelares tid är slut, stanna båda timers och visa en alert som meddelar vem som vann.
-//
