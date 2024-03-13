@@ -18,10 +18,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var p1MoveLabel: UILabel!
     @IBOutlet weak var p2MoveLabel: UILabel!
     
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var anotherGameButton: UIButton!
+    
     var p1Timer: Timer?
     var p2Timer: Timer?
-    var p1CurrentTime = 600
-    var p2CurrentTime = 600
+    var p1CurrentTime = 10
+    var p2CurrentTime = 10
     var p1Moves = 0
     var p2Moves = 0
     var gameStarted = false
@@ -29,8 +33,29 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupButtons()
         setupTapRecognizers()
         setUpInitTimerArea()
+    }
+    
+    func setupButtons(){
+        if let symbolImage = UIImage(systemName: "play") {
+            let scaledImage = symbolImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30, weight: .thin))
+            playButton.setImage(scaledImage, for: .normal)
+        }
+        
+        if let symbolImage = UIImage(systemName: "pause") {
+            let scaledImage = symbolImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30, weight: .thin))
+            pauseButton.setImage(scaledImage, for: .normal)
+        }
+        
+        if let symbolImage = UIImage(systemName: "repeat") {
+            let scaledImage = symbolImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30, weight: .thin))
+            anotherGameButton.setImage(scaledImage, for: .normal)
+        }
+        
+        
+        
     }
     
     func setupTapRecognizers(){
@@ -53,7 +78,7 @@ class ViewController: UIViewController {
         } else {
             if sender.view == p1TimerArea {
                 if p1Timer != nil && p1Timer!.isValid {
-                    p1Timer?.invalidate()
+                    pause(p1Timer)
                     startP2Timer()
                     addGreenBg(on: p2TimerArea)
                     p1Moves += 1
@@ -62,7 +87,7 @@ class ViewController: UIViewController {
                 }
             } else if sender.view == p2TimerArea {
                 if p2Timer != nil && p2Timer!.isValid {
-                    p2Timer?.invalidate()
+                    pause(p2Timer)
                     startP1Timer()
                     addGreenBg(on: p1TimerArea)
                     p2Moves += 1
@@ -85,7 +110,8 @@ class ViewController: UIViewController {
     
     func applyTextAndFont(to timerLabels: [UILabel]) {
         for label in timerLabels {
-            label.text = "10:00"
+            updateLabel(p: 1)
+            updateLabel(p: 2)
             label.font = UIFont(name: "Arial", size: 60)
         }
     }
@@ -107,6 +133,7 @@ class ViewController: UIViewController {
             guard let self = self else { return }
             self.p1CurrentTime -= 1
             self.updateLabel(p: 1)
+            gameEndCheck(by: p1CurrentTime, for: 1)
         }
     }
     
@@ -115,7 +142,27 @@ class ViewController: UIViewController {
             guard let self = self else { return }
             self.p2CurrentTime -= 1
             self.updateLabel(p: 2)
+            gameEndCheck(by: p2CurrentTime, for: 2)
         }
+    }
+    
+    func pause(_ timer: Timer?){
+        timer?.invalidate()
+    }
+    
+    func gameEndCheck(by currentTime: Int, for player: Int){
+        if currentTime == 0 {
+            pause(p2Timer)
+            pause(p1Timer)
+            
+            if player == 1 {
+                p1TimerArea.backgroundColor = UIColor(red: 199/255, green: 69/255, blue: 71/255, alpha: 1.0)
+            }
+            if player == 2 {
+                p2TimerArea.backgroundColor = UIColor(red: 199/255, green: 69/255, blue: 71/255, alpha: 1.0)
+            }
+        }
+       
     }
     
     func updateLabel(p player: Int) {
@@ -139,7 +186,7 @@ class ViewController: UIViewController {
     }
     
     func addGreenBg(on timerArea: UIView) {
-        timerArea.backgroundColor = UIColor(red: 0.0, green: 0.7, blue: 0.0, alpha: 0.6)
+        timerArea.backgroundColor = UIColor(red: 123/255, green: 183/255, blue: 85/255, alpha: 1.0)
         
         if timerArea == p1TimerArea {
             p2TimerArea.backgroundColor = UIColor.systemGray4
@@ -148,4 +195,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
