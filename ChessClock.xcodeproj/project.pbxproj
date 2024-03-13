@@ -13,6 +13,7 @@
 		A93FB0D62B9F41C300D9F31A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A93FB0D52B9F41C300D9F31A /* Base */; };
 		A93FB0D82B9F41C400D9F31A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93FB0D72B9F41C400D9F31A /* Assets.xcassets */; };
 		A93FB0DB2B9F41C400D9F31A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A93FB0DA2B9F41C400D9F31A /* Base */; };
+		A93FB1052BA1A82E00D9F31A /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93FB1042BA1A82E00D9F31A /* GameOverViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A93FB0D72B9F41C400D9F31A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A93FB0DA2B9F41C400D9F31A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A93FB0DC2B9F41C400D9F31A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A93FB1042BA1A82E00D9F31A /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				A93FB0D72B9F41C400D9F31A /* Assets.xcassets */,
 				A93FB0D92B9F41C400D9F31A /* LaunchScreen.storyboard */,
 				A93FB0DC2B9F41C400D9F31A /* Info.plist */,
+				A93FB1042BA1A82E00D9F31A /* GameOverViewController.swift */,
 			);
 			path = ChessClock;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A93FB1052BA1A82E00D9F31A /* GameOverViewController.swift in Sources */,
 				A93FB0D32B9F41C300D9F31A /* ViewController.swift in Sources */,
 				A93FB0CF2B9F41C300D9F31A /* AppDelegate.swift in Sources */,
 				A93FB0D12B9F41C300D9F31A /* SceneDelegate.swift in Sources */,

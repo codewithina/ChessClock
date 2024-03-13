@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var anotherGameButton: UIButton!
     
+    let gameOverSegue = "gameOverSegue"
+    
     var p1Timer: Timer?
     var p2Timer: Timer?
     var p1CurrentTime = 10
@@ -29,6 +31,7 @@ class ViewController: UIViewController {
     var p1Moves = 0
     var p2Moves = 0
     var gameStarted = false
+    var winner: String?
     
     
     override func viewDidLoad() {
@@ -53,9 +56,6 @@ class ViewController: UIViewController {
             let scaledImage = symbolImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30, weight: .thin))
             anotherGameButton.setImage(scaledImage, for: .normal)
         }
-        
-        
-        
     }
     
     func setupTapRecognizers(){
@@ -157,10 +157,14 @@ class ViewController: UIViewController {
             
             if player == 1 {
                 p1TimerArea.backgroundColor = UIColor(red: 199/255, green: 69/255, blue: 71/255, alpha: 1.0)
+                winner = "Player 2 is the winner :)"
             }
             if player == 2 {
                 p2TimerArea.backgroundColor = UIColor(red: 199/255, green: 69/255, blue: 71/255, alpha: 1.0)
+                winner = "Player 2 is the winner :)"
             }
+            
+            performSegue(withIdentifier: gameOverSegue, sender: self)
         }
        
     }
@@ -192,6 +196,13 @@ class ViewController: UIViewController {
             p2TimerArea.backgroundColor = UIColor.systemGray4
         } else if timerArea == p2TimerArea {
             p1TimerArea.backgroundColor = UIColor.systemGray4
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == gameOverSegue {
+            if let destinationVC = segue.destination as? GameOverViewController {
+                destinationVC.winningPlayer = winner}
         }
     }
 }
